@@ -10,20 +10,11 @@ module AdventOfCode
       end
       
       def self.common_bits(values, type = :most)
-        bits = Array.new(values.first.size) { [0, 0] }
-        values.each do |v|
-          v.chars.each_with_index { |b,i| bits[i][b.to_i ^ 1] += 1 }
-        end
-        bits.collect! do |b|
-          if b[1] > b[0]
-            1
-          elsif b[1] == b[0]
-            1
-          else
-            0
-          end
-        end
-        type == :most ? bits : bits.collect { |b| b ^ 1 }
+        mcb = Array.new(values.first.size) { [0, 0] }
+        keep = type == :most ? 1 : 0
+        values.each { |v| v.each_char.with_index { |b,i| mcb[i][b.to_i] += 1 } }
+        mcb.collect! { |b| b[0] == b[1] ? keep : b.index(b.max) ^ 1 }
+        type == :most ? mcb : mcb.collect { |b| b ^ 1 }
       end
       
       def self.problem_two(values)
