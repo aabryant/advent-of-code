@@ -6,9 +6,7 @@ module AdventOfCode
       end
       
       def self.problem_two(values)
-        problem_one(
-          (2..(values.size - 1)).collect { |i| values[(i - 2)..i].sum }
-        )
+        problem_one((2..(values.size - 1)).map { |i| values[(i - 2)..i].sum })
       end
       
       def self.test(values)

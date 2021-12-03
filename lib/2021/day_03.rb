@@ -2,10 +2,9 @@ module AdventOfCode
   module Challenge2021
     module Day03
       def self.problem_one(values)
-        mcb = common_bits(values)
         {
-          gamma: mcb.join.to_i(2),
-          epsilon: mcb.collect { |b| b.to_i ^ 1 }.join.to_i(2)
+          gamma: common_bits(values).join.to_i(2),
+          epsilon: common_bits(values, :least).join.to_i(2)
         }
       end
       
@@ -17,24 +16,19 @@ module AdventOfCode
       end
       
       def self.problem_two(values)
-        oxygen = values.clone
-        i = 0
-        until oxygen.size == 1
-          bits = common_bits(oxygen)
-          oxygen = oxygen.select { |r| r[i].to_i == bits[i] }
+        oxygen, co2, i = values.clone, values.clone, 0
+        until oxygen.size == 1 && co2.size == 1
+          if oxygen.size > 1
+            bits = common_bits(oxygen)
+            oxygen.select! { |r| r[i].to_i == bits[i] }
+          end
+          if co2.size > 1
+            bits = common_bits(co2, :least)
+            co2.select! { |r| r[i].to_i == bits[i] }
+          end
           i += 1
         end
-        co2 = values.clone
-        i = 0
-        until co2.size == 1
-          bits = common_bits(co2, :least)
-          co2 = co2.select { |r| r[i].to_i == bits[i] }
-          i += 1
-        end
-        {
-          oxygen: oxygen.first.to_i(2),
-          co2: co2.first.to_i(2)
-        }
+        { oxygen: oxygen.first.to_i(2), co2: co2.first.to_i(2) }
       end
       
       def self.test(values)
