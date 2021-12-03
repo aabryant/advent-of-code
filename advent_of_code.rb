@@ -29,6 +29,14 @@ module AdventOfCode
     require './lib/%d/day_%02d' % [YEAR, day]
     for_year.const_get(:"Day#{'%02d' % day}")
   end
+  
+  def self.run
+    (1..25).each do |day|
+      break if Date.new(YEAR, 12, day) > Date.today
+
+      File.open(day_file(day)) { |f| day_module(day).test(f.readlines) }
+    end
+  end
 
   def self.parse_args(args)
     i = 0
@@ -52,11 +60,4 @@ module AdventOfCode
 end
 
 AdventOfCode.parse_args(ARGV)
-
-(1..25).each do |day|
-  break if Date.new(2021, 12, day) > Date.today
-
-  File.open(AdventOfCode.day_file(day)) do |f|
-    AdventOfCode.day_module(day).test(f.readlines)
-  end
-end
+AdventOfCode.run
