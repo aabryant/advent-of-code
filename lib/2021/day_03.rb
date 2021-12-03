@@ -2,10 +2,10 @@ module AdventOfCode
   module Challenge2021
     module Day03
       def self.problem_one(values)
-        gamma = common_bits(values).join
+        mcb = common_bits(values)
         {
-          gamma: gamma.to_i(2),
-          epsilon: gamma.chars.collect { |b| b.to_i ^ 1 }.join.to_i(2)
+          gamma: mcb.join.to_i(2),
+          epsilon: mcb.collect { |b| b.to_i ^ 1 }.join.to_i(2)
         }
       end
       
