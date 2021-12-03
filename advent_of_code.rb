@@ -25,7 +25,7 @@ module AdventOfCode
     "data/%d/12-%02d#{EXAMPLE_MODE ? '-example' : ''}.txt" % [YEAR, day]
   end
 
-  def self.day_module(day)
+  def self.for_day(day)
     require './lib/%d/day_%02d' % [YEAR, day]
     for_year.const_get(:"Day#{'%02d' % day}")
   end
@@ -34,7 +34,7 @@ module AdventOfCode
     (1..25).each do |day|
       break if Date.new(YEAR, 12, day) > Date.today
 
-      File.open(day_file(day)) { |f| day_module(day).test(f.readlines) }
+      File.open(day_file(day)) { |f| for_day(day).test(f.readlines) }
     end
   end
 
@@ -45,7 +45,7 @@ module AdventOfCode
       when '-y', '--year'
         set_year(args[i + 1])
         i += 1
-      when /^(?:--year|-y)=(.+)$/
+      when /^(?:--year|-y)=?(.+)$/
         set_year($1)
       when /^\d+$/
         set_year(args[i]) if i == 0
