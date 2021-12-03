@@ -50,9 +50,9 @@ module AdventOfCode
       def self.test(values)
         values = values.collect(&:strip)
         one = problem_one(values)
-        puts "Day Three Problem One: #{one[:gamma] * one[:epsilon]}"
+        puts "  Problem One: #{one[:gamma] * one[:epsilon]}"
         two = problem_two(values)
-        puts "Day Three Problem Two: #{two[:oxygen] * two[:co2]}"
+        puts "  Problem Two: #{two[:oxygen] * two[:co2]}"
       end
     end
   end

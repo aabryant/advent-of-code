@@ -13,8 +13,8 @@ module AdventOfCode
       
       def self.test(values)
         values = values.collect(&:to_i)
-        puts "Day One Problem One: #{problem_one(values)}"
-        puts "Day One Problem Two: #{problem_two(values)}"
+        puts "  Problem One: #{problem_one(values)}"
+        puts "  Problem Two: #{problem_two(values)}"
       end
     end
   end

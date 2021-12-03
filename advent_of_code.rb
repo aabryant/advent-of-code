@@ -31,10 +31,16 @@ module AdventOfCode
   end
   
   def self.run
+    puts "Advent of Code #{YEAR}"
+    puts "===============#{'=' * YEAR.to_s.size}"
     (1..25).each do |day|
       break if Date.new(YEAR, 12, day) > Date.today
 
-      File.open(day_file(day)) { |f| for_day(day).test(f.readlines) }
+      File.open(day_file(day)) do |f|
+        puts "\nDay %02d" % day
+        puts '--------'
+        for_day(day).test(f.readlines)
+      end
     end
   end
 
