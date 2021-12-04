@@ -39,7 +39,7 @@ module AdventOfCode
       File.open(day_file(day)) do |f|
         puts "\nDay %02d" % day
         puts '--------'
-        for_day(day).test(f.readlines)
+        for_day(day).test(f.readlines(chomp: true))
       end
     end
   end
