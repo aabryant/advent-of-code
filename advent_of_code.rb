@@ -33,15 +33,22 @@ module AdventOfCode
   def self.run
     puts "Advent of Code #{YEAR}"
     puts "===============#{'=' * YEAR.to_s.size}"
+    time = 0
     (1..25).each do |day|
       break if Date.new(YEAR, 12, day) > Date.today
 
       File.open(day_file(day)) do |f|
         puts "\nDay %02d" % day
         puts '--------'
+        
+        t0 = Time.now
         for_day(day).test(f.readlines(chomp: true))
+        t1 = Time.now
+        puts "  Time: #{t1 - t0}\n"
+        time += (t1 - t0)
       end
     end
+    puts "\nTotal Time: #{time}"
   end
 
   def self.parse_args(args)
