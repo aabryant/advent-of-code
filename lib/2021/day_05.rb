@@ -45,8 +45,7 @@ module AdventOfCode
       end
 
       def self.test(values)
-        puts "  Problem One: #{problem_one(values.clone)}"
-        puts "  Problem Two: #{problem_two(values.clone)}"
+        [problem_one(values.clone), problem_two(values)]
       end
     end
   end

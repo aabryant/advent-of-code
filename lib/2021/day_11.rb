@@ -94,8 +94,7 @@ module AdventOfCode
       end
 
       def self.test(values)
-        puts "  Problem One: #{problem_one(values)}"
-        puts "  Problem Two: #{problem_two(values)}"
+        [problem_one(values), problem_two(values)]
       end
     end
   end

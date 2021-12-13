@@ -41,8 +41,7 @@ module AdventOfCode
       def self.test(values)
         base = Hash.new { |h, k| h[k] = 0 }
         values.first.split(',').each { |v| base[v.to_i] += 1 }
-        puts "  Problem One: #{problem(base, 80)}"
-        puts "  Problem Two: #{problem(base, 256)}"
+        [problem(base, 80), problem(base, 256)]
       end
     end
   end

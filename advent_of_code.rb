@@ -40,18 +40,36 @@ module AdventOfCode
       File.open(day_file(day)) do |f|
         puts "\nDay %02d" % day
         puts '--------'
-        
-        t0 = Time.now
-        for_day(day).test(f.readlines(chomp: true))
-        t1 = Time.now
-        puts "  Time: #{t1 - t0}\n"
-        time += (t1 - t0)
+
+        challenge = for_day(day)
+        times = @mode == :benchmark ? 1_000 : 1
+        bmtime = 0
+        times.times do
+          data = f.readlines(chomp: true)
+          t0 = Time.now
+          results = challenge.test(data)
+          t1 = Time.now
+          if @mode == :benchmark
+            bmtime += (t1 -t0)
+            f.rewind
+          else
+            results.each_with_index { |r,i| puts "  Problem #{i + 1}: #{r}" }
+            puts "  Time: #{t1 - t0}\n"
+            time += (t1 - t0)
+          end
+        end
+        if @mode == :benchmark
+          bmtime /= 1_000
+          puts "  Average Time: #{bmtime}"
+          time += bmtime
+        end
       end
     end
-    puts "\nTotal Time: #{time}"
+    puts "\nTotal#{@mode == :benchmark ? ' Average' : ''} Time: #{time}"
   end
 
   def self.parse_args(args)
+    @mode = :run
     i = 0
     while i < args.size
       case args[i]
@@ -64,6 +82,8 @@ module AdventOfCode
         set_year(args[i]) if i == 0
       when '-t', '--test', '-e', '--example'
         const_set(:EXAMPLE_MODE, true)
+      when '-b', '--bm', '--benchmark'
+        @mode = :benchmark
       end
       i += 1
     end

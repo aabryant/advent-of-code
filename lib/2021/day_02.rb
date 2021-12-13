@@ -32,9 +32,8 @@ module AdventOfCode
       
       def self.test(values)
         one = problem_one(values)
-        puts "  Problem One: #{one[:horizontal] * one[:depth]}"
         two = problem_two(values)
-        puts "  Problem Two: #{two[:horizontal] * two[:depth]}"
+        [one[:horizontal] * one[:depth], two[:horizontal] * two[:depth]]
       end
     end
   end

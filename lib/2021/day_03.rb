@@ -33,9 +33,8 @@ module AdventOfCode
 
       def self.test(values)
         one = problem_one(values)
-        puts "  Problem One: #{one[:gamma] * one[:epsilon]}"
         two = problem_two(values)
-        puts "  Problem Two: #{two[:oxygen] * two[:co2]}"
+        [one[:gamma] * one[:epsilon], two[:oxygen] * two[:co2]]
       end
     end
   end

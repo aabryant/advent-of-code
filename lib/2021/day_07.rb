@@ -20,8 +20,7 @@ module AdventOfCode
 
       def self.test(values)
         values = values.first.split(',').collect(&:to_i).sort
-        puts "  Problem One: #{problem_one(values)}"
-        puts "  Problem Two: #{problem_two(values)}"
+        [problem_one(values), problem_two(values)]
       end
     end
   end
