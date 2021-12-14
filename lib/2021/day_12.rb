@@ -29,8 +29,8 @@ module AdventOfCode
 
       def self.find_path(connections, stack, with_dupes = false, results = [])
         if stack.last == 'end'
-          stack.shift
-          results << stack[0..]
+          stack.shift unless stack.first
+          results << stack
           return results
         end
 
@@ -41,8 +41,7 @@ module AdventOfCode
             next unless with_dupes
             next if stack.first
 
-            new_stack = stack.clone
-            new_stack[0] = true
+            new_stack = stack[1..]
           else
             new_stack = stack.clone
           end
